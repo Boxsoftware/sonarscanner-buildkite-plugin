@@ -52,7 +52,6 @@ function execute_scanner() {
 
   echo "Running docker cp ${PWD}/. ${DOCKERID}:${WORKDIR}"
   docker cp "${PWD}/." "${DOCKERID}:${WORKDIR}"
-  sleep 60
   LOCAL_ARTIFACTS_DIR="$(mktemp -d "${PWD}/artifacts-tmp.XXXXXXXXXX")"
   if [ -n "${ARTIFACT_PATHS[*]}" ]; then
     for arg in "${ARTIFACT_PATHS[@]}"; do
