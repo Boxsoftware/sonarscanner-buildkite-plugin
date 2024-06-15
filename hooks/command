@@ -27,7 +27,7 @@ WORKDIR="$(plugin_read_config WORKDIR '/workdir')"
 SONARSCANNER_ARGS=()
 
 function execute_scanner() {
-  echo "+++ :docker: :sonarqube: Starting sonar-scanner Boxcore"
+  echo "+++ :docker: :sonarqube: Starting sonar-scanner"
 
   # The docker [create, cp, start] flow replicates copy-on-checkout used in the
   # standard buildkite docker plugin. This avoids file permission errors
@@ -53,7 +53,7 @@ function execute_scanner() {
 
   echo "Running docker cp ${PWD}/. ${DOCKERID}:${WORKDIR}"
   docker cp "${PWD}/." "${DOCKERID}:${WORKDIR}"
-
+  sleep 120
   if [ -n "${ARTIFACT_PATHS[*]}" ]; then
     for arg in "${ARTIFACT_PATHS[@]}"; do
       echo "Running buildkite-agent artifact download ${arg} ${LOCAL_ARTIFACTS_DIR}"
