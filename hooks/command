@@ -27,7 +27,7 @@ WORKDIR="$(plugin_read_config WORKDIR '/workdir')"
 SONARSCANNER_ARGS=()
 
 function execute_scanner() {
-  echo "+++ :docker: :sonarqube: Starting sonar-scanner"
+  echo "+++ :docker: :sonarqube: Starting sonar-scanner Boxcore"
 
   # The docker [create, cp, start] flow replicates copy-on-checkout used in the
   # standard buildkite docker plugin. This avoids file permission errors
