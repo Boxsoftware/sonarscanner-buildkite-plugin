@@ -17,7 +17,6 @@ DOTNET_BUILD_PROJECT=$(plugin_read_config DOTNET_BUILD_PROJECT)
 ENABLE_BRANCH_SCAN=$(plugin_read_config ENABLE_BRANCH_SCAN 'false')
 ENABLE_PULL_REQUEST_SCAN=$(plugin_read_config ENABLE_PULL_REQUEST_SCAN 'false')
 IS_DOTNET=$(plugin_read_config IS_DOTNET 'false')
-LOCAL_ARTIFACTS_DIR="$(mktemp -d "${PWD}/artifacts-tmp.XXXXXXXXXX")"
 PROJECT_KEY=$(plugin_read_config PROJECT_KEY)
 SCAN_ONLY_IF_SOURCES_CHANGED=$(plugin_read_config SCAN_ONLY_IF_SOURCES_CHANGED 'false')
 SONARQUBE_HOST=$(plugin_read_config SONARQUBE_HOST)
@@ -53,7 +52,8 @@ function execute_scanner() {
 
   echo "Running docker cp ${PWD}/. ${DOCKERID}:${WORKDIR}"
   docker cp "${PWD}/." "${DOCKERID}:${WORKDIR}"
-  sleep 120
+  sleep 60
+  LOCAL_ARTIFACTS_DIR="$(mktemp -d "${PWD}/artifacts-tmp.XXXXXXXXXX")"
   if [ -n "${ARTIFACT_PATHS[*]}" ]; then
     for arg in "${ARTIFACT_PATHS[@]}"; do
       echo "Running buildkite-agent artifact download ${arg} ${LOCAL_ARTIFACTS_DIR}"
