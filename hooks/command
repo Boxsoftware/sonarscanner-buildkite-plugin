@@ -64,7 +64,6 @@ function execute_scanner() {
     echo "Running docker cp ${LOCAL_ARTIFACTS_DIR}/. ${DOCKERID}:${WORKDIR}"
     docker cp "${LOCAL_ARTIFACTS_DIR}/." "${DOCKERID}:${WORKDIR}"
   fi
-  sleep 60
 
   echo "Running docker start -a ${DOCKERID}"
   docker start -a "${DOCKERID}"
